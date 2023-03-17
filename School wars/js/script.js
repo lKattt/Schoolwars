@@ -16,7 +16,6 @@ function preload() {
 
 }
 
-
 /**
 Description of setup
 */
@@ -24,7 +23,6 @@ function setup() {
 createCanvas(800, 800);
 background(50);
 }
-
 
 /**
 Description of draw()
