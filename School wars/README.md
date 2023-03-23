@@ -6,18 +6,18 @@ The goal of our project is to emulate the play style of bop it in our own way. W
 
 
 # Things we need 
-[x] Makey Makey 
-[x] Tin foil
-[x] play dough 
-[x] wire / copper wire 
+- Makey Makey 
+- Tin foil
+- play dough 
+- wire / copper wire 
 
 # Code
-[x] Background 
-[x] Press Start?? 
-[x] School related? / kindergarten themed?
-[x] Buttons that work with makey makey 
-[x] Goes faster over time? 
-[x] Timer
+- Background 
+- Press Start?? 
+- School related? / kindergarten themed?
+- Buttons that work with makey makey 
+- Goes faster over time? 
+- Timer
 
 # Visuals And Inspiration
 
