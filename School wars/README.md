@@ -25,3 +25,5 @@ The main idea is that it is set in a kindergarten classroom. The play dough will
 
 In terms of style the background would either be drawn as a still or animated. Currently we are thinking of using music in the background to excite the player while they are interacting with our piece. 
 
+![image](https://user-images.githubusercontent.com/117172826/227325923-e82679ea-3bf1-4631-91ac-5cba011792b9.png)
+^^ A classroom in this style but more kids toys around (This is just to get a better sense of rendering style)
