@@ -1,5 +1,5 @@
 /**
-Title of Project
+
 Author Name
 
 This is a template. You must fill in the title,
@@ -20,15 +20,13 @@ function preload() {
 
 }
 
-
 /**
 Description of setup
 */
 function setup() {
-mode = 0;
 createCanvas(800, 800);
+background(50);
 }
-
 
 /**
 Description of draw()
