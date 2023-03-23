@@ -24,6 +24,7 @@ function preload() {
 Description of setup
 */
 function setup() {
+mode = 0;
 createCanvas(800, 800);
 background(50);
 }
@@ -43,8 +44,13 @@ function draw() {
     }
 
     if(mode == 1){
-        fill(156, 55, 133);
+        fill(26, 53, 232);
         rect(100, 100, 100, 100);
+        fill(232, 30, 57);
+        circle(500, 150, 100, 100);
+        
+
+        
     }
 }
 
