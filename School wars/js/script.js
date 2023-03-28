@@ -7,7 +7,7 @@ author, and this description to match your project!
 */
 
 //bind the shape and colors to specific keys (such as the spacebar or the 'A' key)
-// create a timer in the bacground check if the user presses the button in the background within the the time limit then it is valid 
+// create a timer in the background check if the user presses the button in the background within the the time limit then it is valid 
 
 "use strict";
 var mode;
