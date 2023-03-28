@@ -117,9 +117,9 @@ function drawShapes(){
         fill(255, 255, 4);
     }
     
-    quad(476, 420, 526, 360, 526, 471, 500, 420);
+    quad(465, 427, 500, 355, 535, 427, 500, 499);
 
-    console.log(shape);
+    //console.log(shape);
     points(shape);
 }
 
@@ -135,7 +135,7 @@ function countDown(){
             speedUp = 20;
         }
     }
-    console.log(speedUp);
+    //console.log(speedUp);
     textFont(chalkFont);
     textSize(60);
     fill(255);
