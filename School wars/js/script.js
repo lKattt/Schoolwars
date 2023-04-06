@@ -13,6 +13,7 @@ author, and this description to match your project!
 var gameScreen;
 var mode = 0;
 var round = 1;
+var startTime = 3;
 var roundCount = 0;
 var shapeOptions = [/*Square, Circle, Triangle, Diamond, blue, red, green, yellow*/]; 
 var timer = 25;
@@ -25,6 +26,7 @@ var arrShape = [87, 65, 83, 68];
 var shape = 0;
 var answered = false;
 var firstChoice = true;
+var isPressed = true;
 
 let currentTime = Date.now();
 
@@ -42,11 +44,12 @@ function preload() {
 Description of setup
 */
 function setup() {
-//gameScreen = createCanvas(windowWidth, windowHeight);
-gameScreen = createCanvas(800, 800);
+gameScreen = createCanvas(windowWidth, windowHeight);
+//gameScreen = createCanvas(800, 800);
 gameScreen.style('display', 'block');
 frameRate(60);
 background(50);
+//setInterval(timeIt, 9000);
 }
 
 /**
@@ -58,14 +61,20 @@ function draw() {
     if(mode == 0){
         textAlign(CENTER);
         textSize(60);
-        text("School Wars", 400, 300);
+        text("School Wars", width/2, height/2);
         textSize(30);
-        text("Press Enter to Start", 400, 400);
+        text("Press Enter to Start", width/2, height/2 + 90);
         
     }
 
     if(mode == 1){
+        startTimer();
+        timeIt();
+        setTimeout(startGame, 2500);
+        
+    }
 
+    if(mode == 2){
         drawShapes();
         countDown();
         drawLives();
@@ -74,10 +83,10 @@ function draw() {
         
     }
 
-    if(mode == 2){
+    if(mode == 3){
         textAlign(CENTER);
         textSize(60);
-        text("Game Over", 400, 300);
+        text("Game Over", width/2, height/2);
     }
 }
 
@@ -88,19 +97,43 @@ function keyPressed(){
     if (mode === 1) {
         console.log('pressed' + keyCode);
         console.log("correct" + arrShape[shape]);
+        
+       
         if (keyCode === arrShape[shape]) {
             getPoint();
+
         } else {
             if (keyCode != 13) {
                 loselives();
             }
+                
         }
+        
+        //if(x == 5){
+            //loselives();
+       // }
+
+        // if (keyCode === arrShape[shape]) {
+        //     getPoint();
+            
+        // } else {
+        //     if (keyCode != 13) {
+        //         loselives();
+        //     }
+            
+        // }
+        
+       // if(blinkTime() == true){
+            //oselives();
+        //}
     }
 }
 
 function drawShapes(){
     if (Date.now() - currentTime > TIME_BETWEEN_RANDOMIZATIONS) {
         nextPress();
+        
+        
     } else {
         fill(26, 53, 232);
         rect(100, 100, 100, 100);
@@ -112,26 +145,26 @@ function drawShapes(){
         fill(255, 255, 4);
         quad(465, 427, 500, 355, 535, 427, 500, 499);
 
+        //blinkTime();
+        
+        
     }
 }
 
 function countDown(){
+
     timer -= 1 / speedUp;
     if (timer <= 0) {
         loselives();
-        if(speedUp != 20){
-            speedUp -= 20;
-        }
-        else{
-            speedUp = 20;
-        }
-    }
+        timer = 25;
+        
+    } 
     //console.log(speedUp);
     textFont(chalkFont);
     textSize(60);
     fill(255);
-    //text(floor(timer), width/2, height-height/10);
-    text(floor(timer), 359, 651);
+    text(floor(timer), width/2, height-height/10);
+    
     
 }
 
@@ -139,22 +172,22 @@ function drawLives() {
     textFont(chalkFont);
     textSize(60);
     fill(255);
-    //text("Lives " + lives, width - width/8, height/10);
-    text("Lives " + lives, 650, 60);
+    text("Lives " + lives, width - width/8, height/10);
+    
 }
 
 function drawCombo() {
     textFont(chalkFont);
     textSize(60);
     fill(255);
-    //text("Combo " + combo, width/2, height/10);   
-    text("Combo " + combo, 600, 300);
+    text("Combo " + combo, width/2, height/10);   
+    
 }
 
 function points(){
     fill(255, 255, 4);
-    //text("Score = " + score, width/8, height/10);
-    text("Score = " + score, 300, 60);
+    text("Score = " + score, width/8, height/10);
+    //text("Score = " + score, 300, 60);
     
 }
 
@@ -164,7 +197,7 @@ function getPoint() {
     combo++;
     roundCount++;
     nextPress();
-    if (roundCount >= 4) {
+    if (roundCount % 4 == 0) {
         round++;
         nextRound();
 
@@ -175,12 +208,18 @@ function loselives() {
     combo = 0;
     lives -= 1;
     if (lives < 1) {
-        mode = 2;
+        mode = 3;
     }
 }
 
 function nextRound() {
     timer = 25;
+    if (speedUp != 20) {
+        speedUp -= 20;
+    }
+    else {
+        speedUp = 20;
+    }
     console.log("round change");
 }
 
@@ -224,4 +263,27 @@ function nextPress() {
     }
     quad(465, 427, 500, 355, 535, 427, 500, 499);
 }
+
+
+function startTimer() {
+    if (startTime > 1) {
+        text(Math.round(startTime), width/2, height/2);
+        
+    } else {
+        text("GO", width / 2, height / 2);
+    };
+    
+}
+
+function timeIt() {
+    if(startTime > 0){
+        startTime -= deltaTime / 1000;
+    }
+
+}
+
+function startGame(){
+    mode = 2;
+}
+
 
