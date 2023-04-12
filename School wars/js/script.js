@@ -12,25 +12,51 @@ author, and this description to match your project!
 "use strict";
 var gameScreen;
 var mode = 0;
-var round = 1;
+var roundNum = 1;
 var startTime = 3;
 var roundCount = 0;
-var shapeOptions = [/*Square, Circle, Triangle, Diamond, blue, red, green, yellow*/]; 
 var timer = 25;
 var speedUp = 100;
+
 var chalkFont;
+var joystixFont;
+var luckiestGuyFont;
+var RussoOneFont;
+var VT323;
+
 var score = 0;
 var combo = 0;
 var lives = 3;
 var arrShape = [87, 65, 83, 68];
-var shape = 0;
+var item = 0;
+var item2 = 0;
+var item3 = 0;
+var item4 = 0;
+var randBackgroundNum = 0;
 var answered = false;
 var firstChoice = true;
 var isPressed = true;
 
 let currentTime = Date.now();
+var bg;
 
 const TIME_BETWEEN_RANDOMIZATIONS = 5000; // milliseconds between new randoms
+
+var backgrounds = [];
+var groceryStoreBg;
+var postOfficeBg;
+
+var groceryItems = [];
+var apple;
+var basket;
+var croissant;
+var knife;
+
+var postOfficeItems = [];
+var letter;
+var box;
+var stamp;
+var tape;
 
 
 /**
@@ -38,6 +64,29 @@ Description of preload
 */
 function preload() {
     chalkFont = loadFont('assets/fonts/Chalktastic-r78L.ttf');
+
+    //backgrounds
+    groceryStoreBg = loadImage('assets/images/backgrounds/grocery_store.jpg');
+    postOfficeBg = loadImage('assets/images/backgrounds/post_office.jpg');
+
+    backgrounds = [groceryStoreBg, postOfficeBg];
+
+    //grocery store 
+    apple = loadImage('assets/images/grocery_store/Apple.png');
+    basket = loadImage('assets/images/grocery_store/Basket.png');
+    croissant = loadImage('assets/images/grocery_store/Croissant.png');
+    knife = loadImage('assets/images/grocery_store/Knife.png');
+
+    groceryItems = [apple, basket, croissant, knife];
+
+    //post office
+    letter = loadImage('assets/images/post_office/Letter.png');
+    box = loadImage('assets/images/post_office/Package.png');
+    stamp = loadImage('assets/images/post_office/Stamp.png');
+    tape = loadImage('assets/images/post_office/Tape.png');
+
+    postOfficeItems = [letter, box, stamp, tape];
+
 }
 
 /**
@@ -45,11 +94,11 @@ Description of setup
 */
 function setup() {
 gameScreen = createCanvas(windowWidth, windowHeight);
-//gameScreen = createCanvas(800, 800);
 gameScreen.style('display', 'block');
 frameRate(60);
 background(50);
-//setInterval(timeIt, 9000);
+imageMode(CENTER);
+
 }
 
 /**
@@ -79,6 +128,7 @@ function draw() {
         countDown();
         drawLives();
         drawCombo();
+        drawRound();
         points();
         
     }
@@ -91,64 +141,61 @@ function draw() {
 }
 
 function keyPressed(){
-    if(keyCode === ENTER && mode === 0){
+    if(keyCode == ENTER && mode == 0){
         mode = 1;
     }
-    if (mode === 1) {
+
+    if (mode == 1) {
         console.log('pressed' + keyCode);
-        console.log("correct" + arrShape[shape]);
+        console.log("correct" + arrShape[item]);
         
-       
-        if (keyCode === arrShape[shape]) {
-            getPoint();
-
-        } else {
-            if (keyCode != 13) {
-                loselives();
-            }
-                
-        }
-        
-        //if(x == 5){
-            //loselives();
-       // }
-
-        // if (keyCode === arrShape[shape]) {
-        //     getPoint();
-            
-        // } else {
-        //     if (keyCode != 13) {
-        //         loselives();
-        //     }
-            
-        // }
-        
-       // if(blinkTime() == true){
-            //oselives();
-        //}
     }
 }
 
 function drawShapes(){
-    if (Date.now() - currentTime > TIME_BETWEEN_RANDOMIZATIONS) {
-        nextPress();
-        
-        
-    } else {
-        fill(26, 53, 232);
-        rect(100, 100, 100, 100);
-        fill(232, 30, 57);
-        circle(500, 150, 100, 100);
-        fill(61, 226, 35);
-        triangle(145, 377, 99, 480, 190, 480);
-        //triangle(width / 4, height - height / 10, width / 3.1, height - height / 3, width / 2.5, height - height / 10);
-        fill(255, 255, 4);
-        quad(465, 427, 500, 355, 535, 427, 500, 499);
+    bg = backgrounds[0];
+    if (bg == backgrounds[0]) {
+        image(backgrounds[0], width / 2, height / 2, width, height);
 
-        //blinkTime();
-        
-        
+        for (var i = 0; i < 4; i++) {
+            if (i == 0) {
+                image(groceryItems[item], width / 8, height / 2, 200, 200);
+            }
+
+            if (i == 1) {
+                image(groceryItems[item2], width / 2 - 200, height / 2, 200, 200);
+            }
+
+            if (i == 2) {
+                image(groceryItems[item3], width / 2 + 200, height / 2, 200, 200);
+            }
+
+            if (i == 3) {
+                image(groceryItems[item4], width - width / 8, height / 2, 200, 200);
+            }
+        }
     }
+    else if (bg == backgrounds[1]) {
+        image(backgrounds[1], width / 2, height / 2, width, height);
+        for (var i = 0; i < 4; i++) {
+            if (i == 0) {
+                image(postOfficeItems[item], width / 8, height / 2, 200, 200);
+            }
+
+            if (i == 1) {
+                image(postOfficeItems[item2], width / 2 - 200, height / 2, 200, 200);
+            }
+
+            if (i == 2) {
+                image(postOfficeItems[item3], width / 2 + 200, height / 2, 200, 200);
+            }
+
+            if (i == 3) {
+                image(postOfficeItems[item4], width - width / 8, height / 2, 200, 200);
+            }
+        }
+    }
+    
 }
 
 function countDown(){
@@ -172,7 +219,7 @@ function drawLives() {
     textFont(chalkFont);
     textSize(60);
     fill(255);
-    text("Lives " + lives, width - width/8, height/10);
+    text("Lives " + lives, width-width/8, height-height/10);
     
 }
 
@@ -180,14 +227,20 @@ function drawCombo() {
     textFont(chalkFont);
     textSize(60);
     fill(255);
-    text("Combo " + combo, width/2, height/10);   
+    text("Combo " + combo,  width-width/8, height/10);   
     
+}
+
+function drawRound(){
+    textFont(chalkFont);
+    textSize(60);
+    fill(255);
+    text("Round " + roundNum, width/2, height/10);
 }
 
 function points(){
     fill(255, 255, 4);
     text("Score = " + score, width/8, height/10);
-    //text("Score = " + score, 300, 60);
     
 }
 
@@ -198,13 +251,15 @@ function getPoint() {
     roundCount++;
     nextPress();
     if (roundCount % 4 == 0) {
-        round++;
+        roundNum++;
         nextRound();
+        //bg = backgrounds[floor(random(2))];
 
     }
 }
 
 function loselives() {
+    answered = false;
     combo = 0;
     lives -= 1;
     if (lives < 1) {
@@ -221,47 +276,15 @@ function nextRound() {
         speedUp = 20;
     }
     console.log("round change");
+    randBackgroundNum = floor(random(2));
 }
 
 function nextPress() {
-    shape = floor(random(4));
+    item = floor(random(4));
+    item2 = floor(random(4));
+    item3 = floor(random(4));
+    item4 = floor(random(4));
     currentTime = Date.now();
-    if (shape == 0) {
-        fill(255);
-
-    }
-    else {
-        fill(26, 53, 232);
-    }
-
-    rect(100, 100, 100, 100);
-
-    if (shape == 1) {
-        fill(255);
-    }
-    else {
-        fill(232, 30, 57);
-    }
-
-    circle(500, 150, 100, 100);
-
-    if (shape == 2) {
-        fill(255);
-    }
-    else {
-        fill(61, 226, 35);
-    }
-
-    triangle(145, 377, 99, 480, 190, 480);
-    //triangle(width / 4, height - height / 10, width / 3.1, height - height / 3, width / 2.5, height - height / 10);
-
-    if (shape == 3) {
-        fill(255);
-    }
-    else {
-        fill(255, 255, 4);
-    }
-    quad(465, 427, 500, 355, 535, 427, 500, 499);
 }
 
 
@@ -285,5 +308,17 @@ function timeIt() {
 function startGame(){
     mode = 2;
 }
+
+
+function keyFunction(){
+    if(bg = backgrounds[0]){
+        if (keyIsDown(UP_ARROW) && groceryItems[item] == 0 
+        || keyIsDown(UP_ARROW) && groceryItems[item2] == 0 
+        || keyIsDown(UP_ARROW) && groceryItems[item3] == 0 
+        || keyIsDown(UP_ARROW) && groceryItems[item4] == 0){
+            getPoint();
+        }
+    }
+} 
 
 
