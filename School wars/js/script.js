@@ -94,6 +94,8 @@ var dummyNum = 0;
 var dummyNum2 = 0;
 var dummyNum3 = 0;
 
+var story = "HELP! A magical cube named Cubii crashed through space and crashed onto Earth, unleashing a curse that brought all inanimate objects into MONSTERS! That’s where you come in.Luckily, the cube also contained powerful magic that could be harnessed to fight the monsters! Only YOU can manifest this energy to destroy the monsters.Command Cubii to fight the monsters before they destroy the world! Use the Cubii controller in front of you to use the special attack for each different coloured monster.";
+
 /**
 Description of preload
 */
@@ -215,6 +217,9 @@ function draw() {
     if(mode == 1){
         image(purpleBg, width/2, height/2, width, height);
         image(textBox, width/2, height/2, 1280, 1020);
+        textSize(35);
+        textAlign(CENTER);
+        text(story, 790, 250, 950, 850);
         text("Please enter space to continue", width/2, height - height/10);
     }
 
