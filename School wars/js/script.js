@@ -75,6 +75,17 @@ var beanBag;
 var book;
 var lCard;
 
+var speedUpSounds = [];
+var faster;
+var heatinUp;
+var hurryUp;
+var keepUp;
+var putp;
+var tth;
+var speedRun;
+var speedRun2;
+var speedUp;
+
 var titleMusic; 
 var gameMusic;
 var gameOverMusic;
@@ -100,6 +111,19 @@ function preload() {
     titleMusic = loadSound('assets/sounds/Peachy_-_half.cool.mp3');
     gameMusic = loadSound('assets/sounds/game_music.mp3');
     gameOverMusic = loadSound('assets/sounds/game-over-38511.mp3');
+
+    //Sounds for the speed up each round
+    // faster = loadSound('assets/sounds/audioClips/faster.m4a');
+    // heatinUp = loadSound('assets/sounds/audioClips/heatinUp.m4a');
+    // hurryUp = loadSound('assets/sounds/audioClips/hurryUp.m4a');
+    // keepUp = loadSound('assets/sounds/audioClips/keepUp.m4a');
+    // putp = loadSound('assets/sounds/audioClips/pickUpThePase.m4a');
+    // speedRun = loadSound('assets/sounds/audioClips/speedRun.m4a');
+    // speedRun2 = loadSound('assets/sounds/audioClips/speedRun2.m4a');
+    // speedUp = loadSound('assets/sounds/audioClips/speedup.m4a');
+    // tth = loadSound('assets/sounds/audioClips/timeToHustle.m4a');
+
+    // speedUpSounds = [faster, heatinUp, hurryUp, keepUp, putp, speedRun, speedRun2, speedUp, tth];
 
     //backgrounds
     groceryStoreBg = loadImage('assets/images/backgrounds/grocery_store.jpg'); 
@@ -172,7 +196,7 @@ function draw() {
     if (mode == 0) {
         
         if(dummyNum == 0){
-            titleMusic.play();
+            titleMusic.loop();
             dummyNum++;
         }
         
@@ -205,7 +229,7 @@ function draw() {
         
         if(dummyNum2 == 0){
             titleMusic.stop();
-            gameMusic.play();
+            gameMusic.loop();
             dummyNum2++;
         }
         
