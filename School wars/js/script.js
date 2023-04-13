@@ -126,10 +126,10 @@ function preload() {
     // speedUpSounds = [faster, heatinUp, hurryUp, keepUp, putp, speedRun, speedRun2, speedUp, tth];
 
     //backgrounds
-    groceryStoreBg = loadImage('assets/images/backgrounds/grocery_store.jpg'); 
-    postOfficeBg = loadImage('assets/images/backgrounds/post_office.jpg');
-    libraryBg = loadImage('assets/images/backgrounds/Library.jpg');
-    classRoomBg = loadImage('assets/images/backgrounds/Class_Room.jpg');
+    groceryStoreBg = loadImage('assets/images/backgrounds/Grocerybg.png'); 
+    postOfficeBg = loadImage('assets/images/backgrounds/Post office bg.png');
+    libraryBg = loadImage('assets/images/backgrounds/Librarybg.png');
+    classRoomBg = loadImage('assets/images/backgrounds/classroom.png');
     backgrounds = [groceryStoreBg, postOfficeBg, libraryBg, classRoomBg];
 
     //title/gameOver background
