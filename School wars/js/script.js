@@ -2,12 +2,12 @@
 
 Alex and Katt
 
-This is a template. You must fill in the title,
-author, and this description to match your project!
+---Pattern Smash---
+
+
 */
 
-//bind the shape and colors to specific keys (such as the spacebar or the 'A' key)
-// create a timer in the background check if the user presses the button in the background within the the time limit then it is valid 
+
 
 "use strict";
 var gameScreen;
@@ -262,7 +262,7 @@ function draw() {
 }
 
 function keyPressed() {
-    if (keyCode == ENTER && mode == 0) {
+    if (keyCode == ENTER && mode == 0) { //The modes tell us which screen we are on at a given time. This means that when the player presses the "ENTER" Key it will switch to the background and text to what we named "mode 2" - K
         mode = 1;
        
     }
