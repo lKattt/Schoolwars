@@ -101,12 +101,7 @@ Description of preload
 */
 function preload() {
     //Fonts
-    chalkFont = loadFont('assets/fonts/Chalktastic-r78L.ttf');
-    joystixFont = loadFont('assets/fonts/joystix monospace.otf');
-    luckiestGuyFont = loadFont('assets/fonts/LuckiestGuy-Regular.ttf');
     rexliaFont = loadFont('assets/fonts/rexlia rg.otf');
-    RussoOneFont = loadFont('assets/fonts/RussoOne-Regular.ttf');
-    VT323Font = loadFont('assets/fonts/VT323-Regular.ttf');
     backTo1982Font = loadFont('assets/fonts/BACKTO1982.TTF');
 
     //Music
@@ -195,14 +190,16 @@ Description of draw()
 function draw() {
     clear();
     image(titleBg, width/2, height/2, width, height);
+// ------------ title screen ------------------
     if (mode == 0) {
         
-        if(dummyNum == 0){
+        if(dummyNum == 0){ //our method for having the music not start playing constantly and only playing once. dummynum is to allow us to have a variable that changes so the music will only play if the number equals zero. Therefore only playing once - K
             titleMusic.loop();
             dummyNum++;
         }
         
-        textFont(backTo1982Font);
+    //title screen items
+        textFont(backTo1982Font); 
         textAlign(CENTER);
         textSize(90);
         fill(129, 253, 224);
@@ -213,23 +210,24 @@ function draw() {
         text("Press Enter to Start", width / 2, height / 2 + 90);
 
     }
-
-    if(mode == 1){
+//the modes are to refer back to different screens at different times. These if statements will switch the modes based off key inputs - K
+//---------- Instructions screen --------------
+    if(mode == 1){ 
         image(purpleBg, width/2, height/2, width, height);
-        image(textBox, width/2, height/2, 1280, 1020);
+        image(textBox, width/2, height/2, 1280, 1020); //made to fit Alex's screen so text might move when attempted on different screens - K
         textSize(35);
         textAlign(CENTER);
         text(story, 790, 250, 950, 850);
         text("Please enter space to continue", width/2, height - height/10);
     }
-
+//--------- Timer Countdown screen --------------
     if (mode == 2) {
         startTimer();
         timeIt();
-        setTimeout(startGame, 2500); //this is in draw meaning that youre setting a call of startGame EVERY FRAME THAT MODE == 1, i.e startGame will be ran once for every frame that mode == 1
+        setTimeout(startGame, 2500); //this is in draw meaning that you're setting a call of startGame EVERY FRAME THAT MODE == 1, i.e startGame will be ran once for every frame that mode == 1
 
     }
-
+//------------- Game screen --------------------
     if (mode == 3) {
         
         if(dummyNum2 == 0){
@@ -246,7 +244,7 @@ function draw() {
         points();
 
     }
-
+//----------- Game over screen ----------------
     if (mode == 4) {
         
         if(dummyNum3 == 0){
@@ -286,12 +284,12 @@ function keyPressed() {
     }
 }
 
-function drawShapes() {
+function drawShapes() { //This randomizes item order
    
-    if (bg == backgrounds[0]) {
+    if (bg == backgrounds[0]) { // calls the first image in the background array 
         image(backgrounds[0], width / 2, height / 2, width, height);
 
-        for (var i = 0; i < 4; i++) {
+        for (var i = 0; i < 4; i++) {  //for every spot in the array take one item (not specified) and put it in that place | same code for every separate setting 
             if (i == 0) {
                 image(groceryItems[item], width / 5, height / 2, 250, 250);
             }
@@ -372,6 +370,7 @@ function drawShapes() {
 
 }
 
+//----------------------------------------- UI counter, lives, combo, points and rounds ------------------------------------------------------
 function countDown() {
 
     timer -= 1 / speedUp;
@@ -380,7 +379,6 @@ function countDown() {
         timer = 25;
 
     }
-    //console.log(speedUp);
     textFont(rexliaFont);
     textSize(60);
     fill(255);
@@ -433,7 +431,7 @@ function getPoint() {
     }
 }
 
-function loselives() {
+function loselives() { //if the answered flag is true or false then the combo resets and you lose a life | This happens every time you press a wrong key
     answered = false;
     combo = 0;
     lives -= 1;
@@ -442,7 +440,7 @@ function loselives() {
     }
 }
 
-function nextRound() {
+function nextRound() { //controls when the round ends, the round ends when you finish one sequence
     timer = 25;
     if (speedUp != 20) {
         speedUp -= 20;
@@ -454,7 +452,7 @@ function nextRound() {
     randBackgroundNum = floor(random(4));
 }
 
-function nextPress() {
+function nextPress() { 
     itemList.splice(0, itemList.length); //clears the itemList array -t
     item = floor(random(4));
     item2 = floor(random(4));
